@@ -11,3 +11,10 @@ spec:
       - sh
       - -c
       - "exec tail -f /dev/null"
+    volumeMounts:
+      - name: analysis-development
+        mountPath: /devl
+  volumes:
+    - name: analysis-development
+      persistentVolumeClaim:
+        claimName: analysis-development

@@ -26,12 +26,17 @@ try:
                              bootstrap_servers=[args.broker],
                              api_version=(0, 10), consumer_timeout_ms=1000)
 
-
     for msg in consumer:
         buf = msg.value
         reader = pa.ipc.open_stream(buf)
         batches = [b for b in reader]
         arrays = awkward.fromarrow(batches[0])
-        print(arrays)
+        v_particles = uproot_methods.TLorentzVectorArray.from_ptetaphi(
+            arrays['Electrons_pt'], arrays['Electrons_eta'],
+            arrays['Electrons_phi'], arrays['Electrons_e'],
+        )
+        v_particles = v_particles[v_particles.counts >= 2]
+        print(v_particles.pt.tolist())
 except Exception as ex:
     print(ex)
+    raise
