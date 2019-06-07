@@ -17,12 +17,4 @@ spec:
         command:
           - sh
           - -c
-          - "python /servicex/invariant_mass.py --broker servicex-kafka.kafka.svc.cluster.local > /devl/out.txt"
-
-        volumeMounts:
-          - name: analysis-development
-            mountPath: /devl
-      volumes:
-        - name: analysis-development
-          persistentVolumeClaim:
-            claimName: analysis-development
+          - "python /servicex/invariant_mass.py --broker servicex-kafka.kafka.svc.cluster.local"
