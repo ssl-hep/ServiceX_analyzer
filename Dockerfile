@@ -11,5 +11,3 @@ COPY requirements.txt /servicex
 RUN pip install -r /servicex/requirements.txt
 
 COPY . /servicex/
-
-CMD python /servicex/invariant_mass.py --broker servicex-kafka.kafka.svc.cluster.local
