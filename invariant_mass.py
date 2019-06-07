@@ -42,7 +42,8 @@ try:
                             arrays['Electrons_phi'], arrays['Electrons_e'],
                         )
                         v_particles = v_particles[v_particles.counts >= 2]
-                        print(v_particles.pt.tolist())
+                        diparticles = v_particles[:, 0] + v_particles[:, 1]
+                        print("Diparticle mass: " + str(diparticles.mass))
         else:
             running = False
 
