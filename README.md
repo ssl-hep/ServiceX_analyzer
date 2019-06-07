@@ -45,6 +45,16 @@ workstation, or copy new python files directly into the pod:
 % kubectl cp invariant-mass-analysis:/devl/myplot.png ~/myplot.png
 ```
 
+# Running as a Job
+We have a spec that deploys the analyzer as a job inside the cluster. For 
+now it still depends on a read-write-once volume which means only one instance 
+of the job pod can run at a time.
 
+To launch the job
+```bash
+% kubectl apply -f kube/invariant_mass_job.yaml
+```
+
+When it runs, it stores the output as text in the persistent volume
 
 

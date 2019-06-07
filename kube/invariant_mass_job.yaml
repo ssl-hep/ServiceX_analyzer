@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: invariant-mass-job
+spec:
+  backoffLimit: 6 # number of retries before throwing error
+  template:
+    metadata:
+      labels:
+        app: analyzer
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: invariant-mass
+        image: sslhep/servicex-analysis:latest
+        imagePullPolicy: Always
+        command:
+          - sh
+          - -c
+          - "python /servicex/invariant_mass.py --broker servicex-kafka.kafka.svc.cluster.local > /devl/out.txt"
+
+        volumeMounts:
+          - name: analysis-development
+            mountPath: /devl
+      volumes:
+        - name: analysis-development
+          persistentVolumeClaim:
+            claimName: analysis-development

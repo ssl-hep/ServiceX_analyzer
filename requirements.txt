@@ -1,3 +1,4 @@
 awkward==0.10.2
 pyarrow
 kafka
+uproot
