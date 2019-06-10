@@ -4,6 +4,7 @@ metadata:
   name: invariant-mass-job
 spec:
   backoffLimit: 6 # number of retries before throwing error
+  parallelism: 1
   template:
     metadata:
       labels:
