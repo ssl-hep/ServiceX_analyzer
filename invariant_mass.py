@@ -8,6 +8,11 @@ from confluent_kafka import Consumer, KafkaException
 import uproot_methods
 import logging
 
+from coffea import hist
+import matplotlib.pyplot as plt
+
+
+
 kakfa_brokers = []
 
 parser = argparse.ArgumentParser(
@@ -72,6 +77,12 @@ try:
                 v_particles = v_particles[v_particles.counts >= 2]
                 diparticles = v_particles[:, 0] + v_particles[:, 1]
                 print("Diparticle mass: " + str(diparticles.mass))
+
+                mass_hist = hist.Hist('Counts', hist.Bin('mass', r'$m_{\mu\mu}$ (GeV)', 150, 0.0, 150.0))
+                mass_hist.fill(mass=diparticles.mass)
+                fig, ax, _ = hist.plot1d(mass_hist)
+                plt.show()
+                # Can add histograms via mass_hist.add(mass_hist_2)
 
                 # Once we are assigned a partition and start getting messages
                 # we can tighten up the timeout
