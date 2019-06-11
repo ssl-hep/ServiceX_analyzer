@@ -79,7 +79,7 @@ try:
                 print("Diparticle mass: " + str(diparticles.mass))
 
                 mass_hist = hist.Hist('Counts', hist.Bin('mass', r'$m_{\mu\mu}$ (GeV)', 150, 0.0, 150.0))
-                mass_hist.fill(mass=diparticles.mass)
+                mass_hist.fill(mass=diparticles.mass/1000.0)
                 fig, ax, _ = hist.plot1d(mass_hist)
                 plt.show()
                 # Can add histograms via mass_hist.add(mass_hist_2)
