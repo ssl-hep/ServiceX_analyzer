@@ -55,6 +55,23 @@ To launch the job
 % kubectl apply -f kube/invariant_mass_job.yaml
 ```
 
-When it runs, it stores the output as text in the persistent volume
+When it runs, it outputs the histograms as blobs on a kafka topic.
+
+# Histogramming
+We have a simple script that reads histogram blobs from kafka, accumulates
+them and then outputs a plot.
+
+It runs from the same docker image as the analyzer. You run it with:
+```bash
+% python histogrammer.py  --broker servicex-kafka.kafka.svc.cluster.local
+```
+
+When it detects the end of the histogram topic it writes a .png file plot to
+the `/servicex` directory. 
+
+You can copy this down to your local workstation with
+```bash
+% kubectl cp invariant-mass-analysis:/servicex/plot.png /tmp/plot.png
+```
 
 
