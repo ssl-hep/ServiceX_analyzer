@@ -2,3 +2,5 @@ awkward==0.10.2
 pyarrow
 confluent-kafka
 uproot
+coffea>=0.5.6
+lz4tools
