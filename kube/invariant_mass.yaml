@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: invariant-mass-analysis
+spec:
+  containers:
+  - name: transform-cli
+    image: sslhep/servicex-analysis:latest
+    imagePullPolicy: Always
+    command:
+      - sh
+      - -c
+      - "exec tail -f /dev/null"
+    volumeMounts:
+      - name: analysis-development
+        mountPath: /devl
+  volumes:
+    - name: analysis-development
+      persistentVolumeClaim:
+        claimName: analysis-development
