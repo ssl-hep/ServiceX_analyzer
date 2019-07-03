@@ -10,6 +10,7 @@ import sys
 from confluent_kafka import Consumer, KafkaException, Producer
 import uproot_methods
 import logging
+import requests
 
 from coffea import hist
 import matplotlib.pyplot as plt
@@ -102,9 +103,13 @@ try:
                 histblob = lz4f.compress(pickle.dumps(mass_hist))
                 p.produce(args.hist_topic, histblob, callback=delivery_callback)
 
-                fig, ax, _ = hist.plot1d(mass_hist)
-                plt.show()
+                # fig, ax, _ = hist.plot1d(mass_hist)
+                # plt.show()
                 # Can add histograms via mass_hist.add(mass_hist_2)
+                
+                # Report back that message has been analyzed
+                n_events = len(arrays.tolist())
+                requests.put('https://servicex.slateci.net/drequest/events_processed/' + topic + '/' + str(n_events), verify=False)
 
                 # Once we are assigned a partition and start getting messages
                 # we can tighten up the timeout
