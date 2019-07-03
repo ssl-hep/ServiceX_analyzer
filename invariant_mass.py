@@ -103,8 +103,8 @@ try:
                 histblob = lz4f.compress(pickle.dumps(mass_hist))
                 p.produce(args.hist_topic, histblob, callback=delivery_callback)
 
-                # fig, ax, _ = hist.plot1d(mass_hist)
-                # plt.show()
+                fig, ax, _ = hist.plot1d(mass_hist)
+                plt.show()
                 # Can add histograms via mass_hist.add(mass_hist_2)
                 
                 # Report back that message has been analyzed
