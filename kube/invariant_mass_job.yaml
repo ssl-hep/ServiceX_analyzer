@@ -18,4 +18,4 @@ spec:
         command:
           - sh
           - -c
-          - "python /servicex/invariant_mass.py --broker servicex-kafka.kafka.svc.cluster.local"
+          - "python /servicex/invariant_mass.py --broker servicex-kafka-0.slateci.net:19092 --topic 'servicex'"
