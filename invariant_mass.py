@@ -107,9 +107,10 @@ try:
                 # fig, ax, _ = hist.plot1d(mass_hist)
                 # plt.show()
                 # Can add histograms via mass_hist.add(mass_hist_2)
-                
+
                 # Report back that message has been analyzed
                 n_events = len(arrays.tolist())
+                print("Number of events: " + str(n_events))
                 requests.put('https://servicex.slateci.net/drequest/events_processed/' + topic + '/' + str(n_events), verify=False)
 
                 # Once we are assigned a partition and start getting messages
