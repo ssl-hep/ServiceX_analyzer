@@ -11,11 +11,14 @@ from confluent_kafka import Consumer, KafkaException, Producer
 import uproot_methods
 import logging
 import requests
+import urllib3
 
 from coffea import hist
 import matplotlib.pyplot as plt
 
 
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 kakfa_brokers = []
 
@@ -69,7 +72,7 @@ try:
     # Subscribe to topics
     c.subscribe([args.topic], on_assign=print_assignment)
 
-    timeout = 55.0 # Need a long timeout to allow for partition assignment
+    timeout = 120.0 # Need a long timeout to allow for partition assignment
     running = True
     while running:
         msg = c.poll(timeout=timeout)
@@ -115,7 +118,11 @@ try:
 
                 # Once we are assigned a partition and start getting messages
                 # we can tighten up the timeout
-                timeout = 10.0
+                # timeout = 10.0
+
+            # Report back that message is processed
+            # print(msg.offset())
+
 except Exception as ex:
     print(ex)
     raise
