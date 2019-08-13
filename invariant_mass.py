@@ -72,7 +72,7 @@ try:
     # Subscribe to topics
     c.subscribe([args.topic], on_assign=print_assignment)
 
-    timeout = 120.0 # Need a long timeout to allow for partition assignment
+    timeout = 180.0 # Need a long timeout to allow for partition assignment
     running = True
     while running:
         msg = c.poll(timeout=timeout)
