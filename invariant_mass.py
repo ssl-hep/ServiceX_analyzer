@@ -114,7 +114,9 @@ try:
                 # Report back that message has been analyzed
                 n_events = len(arrays.tolist())
                 print("Number of events: " + str(n_events))
-                requests.put('https://servicex.slateci.net/drequest/events_processed/' + args.topic + '/' + str(n_events), verify=False)
+                # requests.put('https://servicex.slateci.net/drequest/events_processed/' + args.topic + '/' + str(n_events), verify=False)
+                requests.put('https://servicex-frontend.uc.ssl-hep.org:443/events_processed/'
+                             + args.topic + '/' + str(n_events), verify=False)
 
                 # Once we are assigned a partition and start getting messages
                 # we can tighten up the timeout
